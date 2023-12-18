@@ -9,9 +9,15 @@ class Request(models.Model):
 
     objects = models.Manager()
 
+    def __str__(self):
+        return self.title
+
 
 class RequestMessage(models.Model):
     text = models.TextField()
     request = models.ForeignKey(Request, on_delete=models.CASCADE, related_name='messages')
 
     objects = models.Manager()
+
+    def __str__(self):
+        return f'Message {self.pk} for {self.request.__str__()}'

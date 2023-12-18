@@ -1,0 +1,19 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Requests List{% endblock %}
+
+{% block content %}
+    <h1>Requests List</h1>
+
+    {% for request in requests %}
+        <h2><a href="{% url 'myapp:request_detail' request.pk %}">{{ request.title }}</a></h2>
+    {% endfor %}
+
+    <h3>Create a nuw request</h3>
+    <form action="{% url 'myapp:create_request' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create request"></p>
+    </form>
+
+{% endblock %}

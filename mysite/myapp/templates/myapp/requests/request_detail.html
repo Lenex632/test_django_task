@@ -1,0 +1,20 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Requests List{% endblock %}
+
+{% block content %}
+    <h1>{{ target.title }}</h1>
+
+    <p>Published by {{ target.author }}</p>
+
+    <h2>{{ target.description }}</h2>
+
+    <h4><a href="{% url 'myapp:messages_list' target.pk %}">Messages</a></h4>
+
+    <h3>Send a nuw message</h3>
+    <form action="{% url 'myapp:send_message' target.pk %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Send message"></p>
+    </form>
+{% endblock %}
